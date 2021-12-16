@@ -2,7 +2,7 @@
 
 static int	ft_read(int fd, char *buf, int *ret)
 {
-	return (*ret = (int) read(fd, buf, BUFFER_SIZE));
+	return (*ret = (int) read(fd, buf, FOPEN_MAX));
 }
 
 void	ft_freeshka(char **string)
@@ -52,16 +52,16 @@ static int	ft_out(char **ost, char **line, int ret)
 		return (ft_make_line(ost, line));
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, int ret)
 {
 	static char		*ost;
 	char			*buf;
 	char			*tmp;
-	int				ret;
 
-	ret = 0;
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while ((ft_read(fd, buf, &ret)) > 0)
+	buf = malloc(sizeof(char) * (FOPEN_MAX + 1));
+	if (!buf)
+		ft_error(MALLOC_ERROR);
+	while (ft_read(fd, buf, &ret))
 	{
 		buf[ret] = '\0';
 		if (!ost)
