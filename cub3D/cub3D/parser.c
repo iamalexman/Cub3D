@@ -1,64 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
-
-void	rot_map(char **map, int len, int size)
-{
-	char	**r_map;
-	int		i;
-	int		j;
-	int		x;
-
-	i = 0;
-	j = len;
-	r_map = malloc(sizeof(char *) * (size));
-	while (i < size)
-	{
-		if (map[j])
-		{
-			x = 0;
-			r_map[i] = malloc(sizeof(char) * (len));
-			while (j >= 0)
-				r_map[i][x++] = map[j--][i];
-			r_map[i][x] = '\0';
-			j = len;
-			i++;
-		}
-		else
-			j--;
-	}
-	r_map[i] = NULL;
-	check_r_map(r_map, len, size);
-	free_map(r_map);
-}
-
-void	rotate_map(char **map, int len, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		if (ft_strlen(map[i]) < size)
-		{
-			j = (int)ft_strlen(map[i]);
-			while (j < size)
-			{
-				map[i][j] = ' ';
-				j++;
-			}
-			map[i][j] = '\0';
-		}
-		i++;
-	}
-	rot_map(map, i, size);
-	free_map(map);
-}
 
 void	get_map(int i, int j, char **file, t_data *data)
 {
 	char	**map;
-//	char	**tmp;
 	int		size;
 	int		len;
 	int		max_len;
@@ -67,26 +23,17 @@ void	get_map(int i, int j, char **file, t_data *data)
 	while (file[++i])
 		++size;
 	map = malloc(sizeof(char *) * (size + 1));
-//	tmp = malloc(sizeof(char *) * (size + 1));
 	i -= size + 1;
 	max_len = (int)ft_strlen(file[i]);
 	while (file[++i])
 	{
-//		printf("%s\n", file[i]);
 		map[++j] = ft_strdup(file[i]);
-//		tmp[j] = ft_strdup(file[i]);
 		len = (int)ft_strlen(map[j]);
 		if (len > max_len)
 			max_len = len;
 	}
 	map[j + 1] = NULL;
-//	tmp[j + 1] = NULL;
-//	j = -1;
-//	while(map[++j])
-//		printf("%s\n", map[j]);
-//	tmp = check_map(tmp, data, size, max_len);
-//	rotate_map(tmp, size, max_len);
-	check_map(map, data, size, max_len); //DO IT!!!!!!!!! //////////////
+	check_map(map, data, size, max_len);
 	data->map = map;
 }
 

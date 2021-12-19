@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inits.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	init_params(t_params **params)
@@ -25,8 +37,9 @@ void	rgb_init(t_rgb **rgb)
 
 void	mlx_data_init(t_data *data)
 {
-	int	h;
-	int w;
+	int		h;
+	int		w;
+
 	h = 0;
 	w = 0;
 	data->mlx = mlx_init();

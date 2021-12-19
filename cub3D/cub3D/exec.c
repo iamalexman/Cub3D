@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-int	file_size(t_data *data, int out, char *argv)
+int	file_size(int out, char *argv)
 {
 	int		i;
 	int		fd;
@@ -31,7 +43,7 @@ void	parse(t_data *data, char *argv)
 
 	i = 0;
 	out = 1;
-	size = file_size(data, out, argv);
+	size = file_size(out, argv);
 	file = malloc(sizeof(char *) * (size + 1));
 	if (!file)
 		ft_error(MALLOC_ERROR);

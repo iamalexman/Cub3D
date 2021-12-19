@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	check_color(char *str, int *i)
@@ -18,7 +30,7 @@ void	check_color(char *str, int *i)
 		ft_error(DATA_ERROR);
 }
 
-t_rgb	*make_colors(char **rgb_arr, t_data *data, char flag)
+t_rgb	*make_colors(char **rgb_arr)
 {
 	int		i;
 	t_rgb	*rgb;
@@ -26,7 +38,7 @@ t_rgb	*make_colors(char **rgb_arr, t_data *data, char flag)
 	i = -1;
 	rgb = NULL;
 	rgb_init(&rgb);
-	while(rgb_arr[++i])
+	while (rgb_arr[++i])
 	{
 		if (ft_isdigit(*rgb_arr[i]))
 		{
@@ -42,11 +54,10 @@ t_rgb	*make_colors(char **rgb_arr, t_data *data, char flag)
 		else
 			ft_error(DATA_ERROR);
 	}
-	if (i != 3 || (rgb->r < 0 || rgb->g < 0|| rgb->b < 0))
+	if (i != 3 || (rgb->r < 0 || rgb->g < 0 || rgb->b < 0))
 		ft_error(DATA_ERROR);
 	return (rgb);
 }
-
 
 void	get_colors(int *i, char *line, t_data *data, char flag)
 {
@@ -56,7 +67,7 @@ void	get_colors(int *i, char *line, t_data *data, char flag)
 	j = (*i);
 	rgb_arr = NULL;
 	check_color(line, i);
-	while(line[++j])
+	while (line[++j])
 	{
 		if (line[j] == ' ' || line[j] == '\t')
 			continue ;
@@ -66,9 +77,9 @@ void	get_colors(int *i, char *line, t_data *data, char flag)
 			rgb_arr = ft_split(line, ',');
 			free(line);
 			if (flag == 'F')
-				data->colors->floor = make_colors(rgb_arr, data, flag);
+				data->colors->floor = make_colors(rgb_arr);
 			else if (flag == 'C')
-				data->colors->cell = make_colors(rgb_arr, data, flag);
+				data->colors->cell = make_colors(rgb_arr);
 			free_map(rgb_arr);
 			break ;
 		}

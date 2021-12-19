@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <math.h>
-# include "./Libft/libft.h"
 # include <limits.h>
+# include "./Libft/libft.h"
 # include "./minilibx_mms/mlx.h"
 
 # define WIN_X 1024
@@ -93,12 +105,15 @@ int		collect_all(t_data *data);
 
 void	parse_file(t_data *data, char **file, int *i, int *j);
 int		find_map(int *i, char **file, t_data *data);
-
 void	check_r_map(char **map, int size, int len);
 char	**check_map(char **map, t_data *data, int size, int len);
 int		check(char *filename);
+int		check_walls(char *str, int i);
+int		check_string(char *str, int j, t_data *data);
+void	get_char(char c, t_data *data, int i, int j);
 
 void	get_texts(int *i, char *line, t_data *data, char *flag);
+t_rgb	*make_colors(char **arr);
 
 int		ft_close(t_data *data);
 void	free_map(char **map);
@@ -107,7 +122,11 @@ void	if_space(char *str, int *i);
 
 void	run(t_data *data);
 
-t_rgb	*make_colors(char **arr, t_data *data, char flag);
+void	player_move_draw(t_data *data);
+void	ft_move_up(t_data *data);
+void	ft_move_down(t_data *data);
+void	ft_move_left(t_data *data);
+void	ft_move_right(t_data *data);
 void	get_colors(int *i, char *line, t_data *data, char flag);
 
 void	get_move_from_key(t_data *data);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 static void	check_texs(char *str, int i)
@@ -18,7 +30,7 @@ static void	check_texs(char *str, int i)
 	}
 }
 
-static char *get_str_texs(char *str, int *i)
+static char	*get_str_texs(char *str, int *i)
 {
 	int		j;
 	int		len;
@@ -26,7 +38,7 @@ static char *get_str_texs(char *str, int *i)
 
 	j = *i;
 	len = (int)ft_strlen(str);
-	while(str[++j])
+	while (str[++j])
 	{
 		if (!ft_isalnum(str[j]) && str[j] != '_'
 			&& str[j] != '/' && str[j] != '.')
@@ -40,14 +52,14 @@ static char *get_str_texs(char *str, int *i)
 	return (str);
 }
 
-void	get_texts(int *i , char *line, t_data *data, char *flag)
+void	get_texts(int *i, char *line, t_data *data, char *flag)
 {
 	int		j;
 
 	(*i) += 2;
 	j = *i;
 	check_texs(line, *i);
-	while(line[*i])
+	while (line[*i])
 	{
 		if (line[*i] == ' ' || line[*i] == '\t')
 			(*i)++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ebalgruu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/19 13:40:45 by ebalgruu          #+#    #+#             */
+/*   Updated: 2021/12/19 13:40:49 by ebalgruu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 void	ft_send_key(int key, t_data *data)
@@ -32,7 +44,7 @@ void	drawing_map(t_data *data, int x, int y)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'W'
 				|| data->map[i][j] == 'S' || data->map[i][j] == 'E')
 				mlx_put_image_to_window(data->mlx, data->mlx_win, \
-										data->mlx_image, x, y);
+										data->coin, x, y);
 			if (data->map[i][j] == 'C')
 				mlx_put_image_to_window(data->mlx, data->mlx_win, \
 										data->coin, x, y);
@@ -41,6 +53,26 @@ void	drawing_map(t_data *data, int x, int y)
 		y += 20;
 	}
 }
+
+//int	mouse_action(t_data *data)
+//{
+//	//(*f)(int button, int x, int y, void *param);
+//
+//	int	i = 0;
+//	int	j = 0;
+//	int *x;
+//	int *y;
+//
+//	i = 1024;
+//	j = 768;
+//	x = &i;
+//	y = &j;
+////	int     mlx_mouse_hide(void);
+////	mlx_mouse_show(void);
+//	mlx_mouse_move(data->mlx_win, i, j);
+//	mlx_mouse_get_pos(data->mlx_win, x, y);
+//	return (0);
+//}
 
 int	action(t_data *data)
 {
@@ -63,7 +95,9 @@ void	run(t_data *data)
 {
 	mlx_data_init(data);
 	mlx_loop_hook(data->mlx, action, data);
-	mlx_hook(data->mlx_win, 17, 0, ft_close, data);;
+	mlx_hook(data->mlx_win, 17, 0, ft_close, data);
+//	mlx_mouse_hook(data->mlx_win, mlx_mouse_show, data);
+//	mlx_mouse_hook(data->mlx_win, mouse_action, data);
 	mlx_hook(data->mlx_win, 02, (1L << 2), button_pressed, data);
 	mlx_loop(data->mlx);
 	exit(0);
