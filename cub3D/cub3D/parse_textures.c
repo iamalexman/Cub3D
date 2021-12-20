@@ -22,7 +22,7 @@ static void	check_texs(char *str, int i)
 		{
 			if (str[i] == '.' && str[i + 1] == '/')
 				break ;
-			if (str[i] == ' ' || str[i] == '\t')
+			if (str[i] == ' ')
 				i++;
 			else
 				ft_error(DATA_ERROR);
@@ -61,7 +61,7 @@ void	get_texts(int *i, char *line, t_data *data, char *flag)
 	check_texs(line, *i);
 	while (line[*i])
 	{
-		if (line[*i] == ' ' || line[*i] == '\t')
+		if (line[*i] == ' ')
 			(*i)++;
 		else if (line[*i] == '.' && line[(*i) + 1] == '/')
 		{

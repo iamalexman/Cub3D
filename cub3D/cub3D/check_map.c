@@ -12,35 +12,6 @@
 
 #include "cub3D.h"
 
-static char	*clear_tabs(char *str)
-{
-	int		i;
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
-
-	i = -1;
-	tmp = NULL;
-	while (str[++i])
-	{
-		if (str[i] == '\t')
-		{
-			tmp = ft_substr(str, 0, i);
-			tmp2 = ft_substr(str, i + 1, ft_strlen(str) - i);
-			tmp3 = ft_strjoin(tmp, "    ");
-			if (!tmp || !tmp2 || !tmp3)
-				ft_error(MALLOC_ERROR);
-			free(tmp);
-			tmp = ft_strjoin(tmp3, tmp2);
-			free(str);
-			free(tmp2);
-			free(tmp3);
-			str = tmp;
-		}
-	}
-	return (str);
-}
-
 void	get_char(char c, t_data *data, int i, int j)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' )
@@ -115,6 +86,29 @@ void	rot_map(char **map, int len, int size)
 	free(r_map);
 }
 
+void	check_corners(char **map)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+			{
+				if (map[i - 1][j - 1] == ' ' || map[i - 1][j + 1] == ' '
+					|| map[i + 1][j + 1] == ' ' || map[i + 1][j - 1] == ' ')
+					ft_error(MAP_ERROR);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 char	**check_map(char **map, t_data *data, int size, int len)
 {
 	int		i;
@@ -122,13 +116,12 @@ char	**check_map(char **map, t_data *data, int size, int len)
 	i = -1;
 	while (map[++i])
 	{
-		if (ft_strchr(map[i], '\t'))
-			map[i] = clear_tabs(map[i]);
 		check_walls(map[i], 0);
 		if ((int)ft_strlen(map[i]) < len)
 			map[i] = add_space(map[i], len);
 		check_string(map[i], i, data);
 	}
 	rot_map(map, size, len);
+	check_corners(map);
 	return (map);
 }

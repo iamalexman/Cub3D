@@ -52,9 +52,9 @@ void	ft_error(int key)
 
 void	if_space(char *str, int *i)
 {
-	if (str[*i] == ' ' || str[*i] == '\t')
+	if (str[*i] == ' ')
 	{
-		while (str[*i] == ' ' || str[*i] == '\t')
+		while (str[*i] == ' ')
 			(*i)++;
 	}
 }

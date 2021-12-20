@@ -19,7 +19,7 @@ void	check_color(char *str, int *i)
 	dot = 0;
 	while (str[++(*i)])
 	{
-		if (str[*i] == ' ' || str[*i] == '\t' || ft_isdigit(str[*i]))
+		if (str[*i] == ' ' || ft_isdigit(str[*i]))
 			continue ;
 		else if (str[*i] == ',')
 			dot++;
@@ -69,7 +69,7 @@ void	get_colors(int *i, char *line, t_data *data, char flag)
 	check_color(line, i);
 	while (line[++j])
 	{
-		if (line[j] == ' ' || line[j] == '\t')
+		if (line[j] == ' ')
 			continue ;
 		else if (ft_isdigit(line[j]))
 		{
